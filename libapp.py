@@ -18,11 +18,11 @@ def search():
     if request.method == "POST":
         account = request.form['account']
         
-        cursor.execute("SELECT d_from, label from data WHERE d_from='account' ")
+        cursor.execute("SELECT d_from, label from data WHERE d_from LIKE %s ",(account) )
         conn.commit()
         data = cursor.fetchall()
         # all in the search box will return all the tuples
-        if len(account) == 0 and book == 'all': 
+        if len(account) == 0 and account == 'all': 
             cursor.execute("SELECT d_from, label from data")
             conn.commit()
             data = cursor.fetchall()
